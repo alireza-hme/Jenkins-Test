@@ -23,13 +23,13 @@ class ToDoAPITestCase(TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(ToDo.objects.count(), 2)
 
-    # def test_update_todo(self):
-    #     response = self.client.patch(
-    #         f"/api/todos/{self.todo.id}/", {"is_done": True}, format="json"
-    #     )
-    #     self.assertEqual(response.status_code, 200)
-    #     self.todo.refresh_from_db()
-    #     self.assertTrue(self.todo.is_done)
+    def test_update_todo(self):
+        response = self.client.patch(
+            f"/api/todos/{self.todo.id}/", {"is_done": True}, format="json"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.todo.refresh_from_db()
+        self.assertTrue(self.todo.is_done)
 
     def test_delete_todo(self):
         response = self.client.delete(f"/api/todos/{self.todo.id}/")
