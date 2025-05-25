@@ -2,7 +2,6 @@ FROM jenkins/jenkins:lts-jdk17
 
 USER root
 
-# Cache-busting ARG: update this value (e.g., daily) to force plugin reinstallation
 ARG CACHE_DATE=2025-05-26
 
 RUN jenkins-plugin-cli --verbose \
