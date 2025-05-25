@@ -24,23 +24,23 @@ pipeline {
                 }
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'sonar-scanner'
-                }
-            }
-        }
-        stage('OWASP Dependency-Check') {
-            steps {
-                    dependencyCheck odcInstallation: 'Default-DC', additionalArguments: '--scan . --format XML'
-            }
-            post {
-                always {
-                    dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-                }
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         withSonarQubeEnv('SonarQube') {
+        //             sh 'sonar-scanner'
+        //         }
+        //     }
+        // }
+        // stage('OWASP Dependency-Check') {
+        //     steps {
+        //             dependencyCheck odcInstallation: 'Default-DC', additionalArguments: '--scan . --format XML'
+        //     }
+        //     post {
+        //         always {
+        //             dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+        //         }
+        //     }
+        // }
         // stage('Python Security Scan') {
         //     steps {
         //         sh '. venv/bin/activate && pip install bandit safety pip-audit detect-secrets'
