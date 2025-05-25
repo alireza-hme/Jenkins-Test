@@ -7,7 +7,7 @@ services:
     image: custom-jenkins:lts
     container_name: jenkins
     restart: unless-stopped
-    user: jenkins # Jenkins runs as this user inside the container
+    user: jenkins 
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -17,7 +17,7 @@ services:
       - jenkins_home:/var/jenkins_home:rw
       - /var/run/docker.sock:/var/run/docker.sock
     group_add:
-      - 1001 # <-- Replace <HOST_DOCKER_GID> with the number from step 1
+      - 1001 
     networks:
       - jenkins_network
 
