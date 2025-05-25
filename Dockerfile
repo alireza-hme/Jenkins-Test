@@ -10,7 +10,8 @@ RUN jenkins-plugin-cli --verbose \
     jjwt-api:0.11.5-120.v0268cf544b_89 \
     workflow-job:1498.v33a_0c6f3a_4b_4
 
-RUN apt-get update && apt-get install -y docker.io
+RUN apt-get update && apt-get install -y docker.io && \
+    usermod -aG docker jenkins 
 
 USER jenkins
 
