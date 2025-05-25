@@ -1,16 +1,15 @@
-FROM jenkins/jenkins:lts
+FROM jenkins/jenkins:lts-jdk17
 
 USER root
 
-# Install Python and pip
-RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
+# Cache-busting ARG: update this value (e.g., daily) to force plugin reinstallation
+ARG CACHE_DATE=2025-05-26
 
-# Skip initial setup
-ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
-
-# Install plugins
-RUN jenkins-plugin-cli --plugins github junit
+RUN jenkins-plugin-cli --verbose \
+    --plugins \
+      jjwt-api:0.11.5-120.v0268cf544b_89 \
+      workflow-job:1498.v33a_0c6f3a_4b_4
 
 USER jenkins
 
-EXPOSE 8080
+EXPOSE 8080 50000

@@ -1,7 +1,11 @@
 services:
   jenkins:
-    build: .
-    image: jenkins/jenkins:lts-jdk17
+    build:
+      context: .
+      # Pass the same CACHE_DATE arg (or override via --build-arg)
+      args:
+        - CACHE_DATE
+    image: custom-jenkins:lts
     container_name: jenkins
     restart: unless-stopped
     user: jenkins
