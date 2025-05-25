@@ -33,7 +33,7 @@ pipeline {
         }
         stage('OWASP Dependency-Check') {
             steps {
-                dependencyCheck additionalArguments: '--scan . --format XML'
+                    dependencyCheck odcInstallation: 'Default-DC', additionalArguments: '--scan . --format XML'
             }
             post {
                 always {
