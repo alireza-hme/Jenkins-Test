@@ -2,7 +2,6 @@ services:
   jenkins:
     build:
       context: .
-      # Pass the same CACHE_DATE arg (or override via --build-arg)
       args:
         - CACHE_DATE
     image: custom-jenkins:lts
