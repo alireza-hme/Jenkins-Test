@@ -1,4 +1,11 @@
-FROM jenkins/jenkins:lts-jdk11
+FROM jenkins/jenkins:lts-jdk17
+
 USER root
-RUN apt-get update && apt-get install -y docker.io
+
+ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
+
+RUN jenkins-plugin-cli --plugins github junit
+
 USER jenkins
+
+EXPOSE 8080 50000

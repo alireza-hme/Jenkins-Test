@@ -1,14 +1,23 @@
 services:
   jenkins:
     build: .
+    image: jenkins/jenkins:lts-jdk17
+    container_name: jenkins
+    restart: unless-stopped
+    user: jenkins
     ports:
       - "8080:8080"
       - "50000:50000"
-    container_name: jenkins
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
     volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
+      - jenkins_home:/var/jenkins_home:rw
+    networks:
+      - jenkins_network
 
 volumes:
   jenkins_home:
+
+networks:
+  jenkins_network:
+    driver: bridge
