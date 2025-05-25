@@ -11,7 +11,7 @@ RUN jenkins-plugin-cli --verbose \
     workflow-job:1498.v33a_0c6f3a_4b_4
 
 RUN apt-get update && apt-get install -y docker.io && \
-    usermod -aG docker jenkins 
+    usermod -aG docker jenkins # This ensures the jenkins user is in the container's docker group
 
 USER jenkins
 
