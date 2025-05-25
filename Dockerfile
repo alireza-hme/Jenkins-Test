@@ -4,14 +4,18 @@ USER root
 
 ARG CACHE_DATE=2025-05-26
 
+# Install docker and add jenkins user to docker group
+RUN apt-get update && apt-get install -y docker.io && \
+    groupadd -f docker && usermod -aG docker jenkins
+
+# Install plugins
 RUN jenkins-plugin-cli --verbose \
     --plugins \
     jjwt-api:0.11.5-120.v0268cf544b_89 \
     workflow-job:1498.v33a_0c6f3a_4b_4
 
-RUN apt-get update && apt-get install -y docker.io && \
-    usermod -aG docker jenkins # This ensures the jenkins user is in the container's docker group
-
-USER jenkins
+# OPTIONAL: Keep user as root to ensure full access
+# Or switch back to jenkins only if docker group perms are trusted
+USER root
 
 EXPOSE 8080 50000
