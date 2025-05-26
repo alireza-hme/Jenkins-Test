@@ -26,7 +26,7 @@ pipeline {
         }
         stage('OWASP Dependency-Check') {
             steps {
-                dependencyCheck odcInstallation: 'Default-DC', additionalArguments: '--scan . --format XML --prettyPrint'
+                    dependencyCheck odcInstallation: 'OWASP Dependency-Check Vulnerabilities', additionalArguments: '--scan . --format XML --prettyPrint --log dependency-check-run.log'
             }
             post {
                 always {
