@@ -9,7 +9,7 @@ services:
     image: custom-jenkins:lts
     container_name: jenkins
     restart: unless-stopped
-    user: root  # Must be root to access docker.sock directly
+    user: root  
     ports:
       - "8080:8080"
       - "50000:50000"
