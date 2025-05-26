@@ -24,32 +24,16 @@ pipeline {
                 }
             }
         }
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         withSonarQubeEnv('SonarQube') {
-        //             sh 'sonar-scanner'
-        //         }
-        //     }
-        // }
-        // stage('OWASP Dependency-Check') {
-        //     steps {
-        //             dependencyCheck odcInstallation: 'Default-DC', additionalArguments: '--scan . --format XML'
-        //     }
-        //     post {
-        //         always {
-        //             dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-        //         }
-        //     }
-        // }
-        // stage('Python Security Scan') {
-        //     steps {
-        //         sh '. venv/bin/activate && pip install bandit safety pip-audit detect-secrets'
-        //         sh '. venv/bin/activate && bandit -r .'
-        //         sh '. venv/bin/activate && safety check -r requirements.txt'
-        //         sh '. venv/bin/activate && pip-audit'
-        //         sh '. venv/bin/activate && detect-secrets scan > detect-secrets-report.json'
-        //     }
-        // }
+        stage('OWASP Dependency-Check') {
+            steps {
+                dependencyCheck odcInstallation: 'Default-DC', additionalArguments: '--scan . --format XML --prettyPrint'
+            }
+            post {
+                always {
+                    dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t drf-todo-app:latest .'
