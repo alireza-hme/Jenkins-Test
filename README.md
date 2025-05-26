@@ -91,10 +91,3 @@ python manage.py runserver
 ```sh
 python manage.py test
 ```
-
----
-
-## 6. Clean Structure
-
-- All code in a single Django app: `todo`
-- Minimal, beginner-friendly, and ready to use
