@@ -18,6 +18,8 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home:rw
       - /var/run/docker.sock:/var/run/docker.sock
+    group_add:
+      - "1001"
     networks:
       - jenkins_network
 
