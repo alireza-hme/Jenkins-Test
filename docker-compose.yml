@@ -1,6 +1,15 @@
 version: '3.8'
 
 services:
+  socat:
+    image: alpine/socat
+    command: tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "2375:2375"              
+    networks:
+      - jenkins 
   jenkins:
     build:
       context: .
@@ -21,11 +30,11 @@ services:
     group_add:
       - "1001"
     networks:
-      - jenkins_network
+      - jenkins
 
 volumes:
   jenkins_home:
 
 networks:
-  jenkins_network:
-    driver: bridge
+  jenkins:
+    external: true
