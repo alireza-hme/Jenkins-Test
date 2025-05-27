@@ -14,5 +14,4 @@ RUN jenkins-plugin-cli --verbose \
     jjwt-api:0.11.5-120.v0268cf544b_89 \
     workflow-job:1498.v33a_0c6f3a_4b_4
 
-
 EXPOSE 8080 50000
